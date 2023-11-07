@@ -1,0 +1,34 @@
+﻿
+<div class="inner center">
+    <table class="table table-hover @css">
+        <thead>
+            <tr @onclick="DoStuff">
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var o in Owners)
+            {
+                string stuff = "";
+                if(o.OwnerFname == "Shane")
+                {
+                    stuff = "background-color:red;";
+                }
+
+                <tr style="@stuff">
+                    <td>
+                        @o.OwnerFname
+                    </td>
+                    <td>
+                        @o.OwnerLname
+                    </td>
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>

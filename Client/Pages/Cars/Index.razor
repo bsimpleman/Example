@@ -1,0 +1,82 @@
+﻿@page "/Cars/Index/{pageNum:int}"
+@page "/Cars/Index/{pageNum:int}/{searchText}/{searchCategory}"
+@inject Services.Car.ICarClient _ICarClient
+@inject NavigationManager NavigationManager
+
+@inject Services.CarOwner.IOwnerClient _IOwnerClient
+
+<div class="outer">
+    <div class="inner">
+        <h3>Cars Home</h3>
+        <button @onclick="CreateNew" class="btn btn-primary">Add Car</button>
+    </div>
+
+    <br />
+
+    <AddOwnerModal @ref="AddOwnerModal" owners="Owners" />
+
+    <div class="inner">
+        @if (Cars.Cars is not null && Cars.Cars.Count > 0)
+        {
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            Make
+                        </th>
+                        <th>
+                            Model
+                        </th>
+                        <th>
+                            Year
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var c in Cars.Cars)
+                    {
+                        <tr>
+                            <td>
+                                @c.Make
+                            </td>
+                            <td>
+                                @c.Model
+                            </td>
+                            <td>
+                                @c.CarYear
+                            </td>
+                            <td>
+                                @*@c.Price*@
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" @onclick="@(e => Details(c.CarId))">Details</button>
+                                <button class="btn btn-info" @onclick="@(e => AddOwnerModal.Open(c))">Add Owner</button>
+                                <button class="btn btn-secondary" @onclick="@(e => Edit(c.CarId))">Edit</button>
+                                <button class="btn btn-danger" @onclick="@(e => Delete(c.CarId))">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div>
+                <a @onclick="PreviousPage" class="btn btn-primary @HasPrevious()">Previous</a>
+
+                <a @onclick="NextPage" class="btn btn-primary @HasNext()">Next</a>
+
+                <div style="float:right;">
+                    @Cars.RecCnt
+                </div>
+            </div>
+            
+        }
+        else
+        {
+            <strong><em>Loading....</em></strong>
+        }
+    </div>
+</div>

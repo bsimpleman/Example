@@ -1,0 +1,118 @@
+﻿@inject BlazorApp1.WebClient.Services.Car.ICarClient _CarClient
+@inject BlazorApp1.WebClient.Services.CarOwner.IOwnerClient _OwnerClient
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Owner</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                <div>
+                    @if (car is not null)
+                    {
+                        <ul>
+                            <li>
+                                @car.Make
+                            </li>
+                            <li>
+                                @car.Model
+                            </li>
+                            <li>
+                                @car.CarYear
+                            </li>
+                        </ul>
+                    }
+                </div>
+
+                <br />
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            @foreach (var o in owners)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" class="form-check" @onchange="@((e) => AddOwner(e,o.OwnerId))" />
+                                    </td>
+                                    <td>
+                                        @o.OwnerFname
+                                    </td>
+                                    <td>
+                                        @o.OwnerLname
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@code {
+    [Parameter]
+    public CarDetails car { get; set; }
+
+    [Parameter]
+    public List<OwnerDetail> owners { get; set; }
+
+    private List<Guid> ownerList = new List<Guid>();
+
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    public async void Open(CarDetails aCar)
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+
+        car = aCar;
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+
+    private void AddOwner(ChangeEventArgs args, Guid id)
+    {
+        if ((bool)args.Value)
+        {
+            ownerList.Add(id);
+        }
+        else
+        {
+            ownerList.Remove(id);
+        }
+
+    }
+
+    protected async Task SaveCarOwner()
+    {
+
+    }
+}

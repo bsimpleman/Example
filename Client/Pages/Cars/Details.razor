@@ -1,0 +1,65 @@
+﻿@page "/Cars/Details/{CarId:guid}"
+@page "/Cars/AddOwner/{CarId:guid}/{AddOwner:bool}"
+@page "/Cars/Delete/{CarId:guid}/{Delete:bool}"
+@inject Services.Car.ICarClient _ICarClient
+@inject Services.CarOwner.IOwnerClient _IOwnerClient
+@inject NavigationManager NavigationManager
+
+<div class="outer">
+    <div class="inner center">
+        <h1>
+            @title
+        </h1>
+    </div>
+
+    <br />
+
+    <div class="inner">
+        <dl>
+            <dt>Make</dt>
+            <dd>@car.Make</dd>
+
+            <dt>Model</dt>
+            <dd>@car.Model</dd>
+
+            <dt>Year</dt>
+            <dd>@car.CarYear</dd>
+
+            @*<dt>Price</dt>
+            <dd>@car.Price.ToString("C")</dd>
+
+            <dt>Desc</dt>
+            <dd>@car.CarDesc</dd>*@
+
+            @if (Delete)
+            {
+                <dd>
+                    <button @onclick="@DeleteTheCar" class="btn btn-danger">Delete</button>
+                </dd>
+            }
+        </dl>
+    </div>
+
+    <br />
+
+    <div class="inner center">
+        <h4>
+            Owners
+        </h4>
+        <button @onclick="@AddAnOwner" class="btn btn-primary">Add Owner</button>
+    </div>
+
+    @if(owners.Count > 0)
+    {
+        <br />
+
+        <BlazorApp1.WebClient.Pages.CarOwners.CarOwnerList Owners="owners" />
+    }
+
+    @if (AddOwner)
+    {
+        <br />
+
+        <BlazorApp1.WebClient.Pages.CarOwners.SaveOwner CarId="car.CarId" />
+    }
+</div>

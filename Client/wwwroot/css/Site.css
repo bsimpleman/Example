@@ -1,0 +1,90 @@
+body {
+    background-color: aliceblue;
+}
+
+html {
+    font-size: 14px;
+}
+
+.body-content {
+    /*height: auto;*/
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    /*background-color: ghostwhite;*/
+}
+
+.menuColors {
+    background-color: #2e648b;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.outer {
+    height: auto;
+    width: auto;
+    padding: 5px;
+    margin: 5px;
+    /*background-color: #eef6ff;*/
+    /*border-radius: 5px;*/
+}
+
+.inner {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+
+.search {
+    padding: 10px 0px 10px 5px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    /*background-color: white;*/
+    /*border-radius: 5px;*/
+    /*box-shadow: 2px 2px 2px 2px grey;*/
+}
+
+.formContainer {
+    /*    display:table;*/
+    clear: both;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.formSections {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px grey;
+    width: 32%;
+    margin: 5px;
+    display: inline-block;
+    /*float:left;*/
+}
+
+.formColor {
+    background-color: #eef6ff;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.formRows {
+    margin: 10px;
+    padding: 10px 0px 10px 0px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.formWrapper {
+    display: block;
+    /*color: #000;*/
+    padding: 8px 8px;
+    text-decoration: none;
+}

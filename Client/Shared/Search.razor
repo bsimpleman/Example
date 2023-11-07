@@ -1,0 +1,49 @@
+﻿@inject NavigationManager NavigationManager
+
+
+    <div class="input-group">
+        <div class="col-sm-4">
+            <label><strong>Search Text:</strong></label>
+            <input type="search" @bind-value="searchText" class="form-control" />
+        </div>
+
+        <div class="col-sm-3">
+            <label><strong>Category:</strong></label>
+            <select @bind="category" class="form-control">
+                <option value="Cars">Cars</option>
+            </select>
+        </div>
+
+        <div class="col-sm-4">
+            <label><strong>Sub-Category:</strong></label>
+            <select @bind="searchCategory" class="form-control">
+                <option value="Make">Make</option>
+                <option value="Model">Model</option>
+                <option value="LastName">Owner Last Name</option>
+            </select>
+        </div>
+
+        <div class="input-group-append">
+            <br />
+            <button class="btn btn-primary" @onclick="SearchCitations">
+                <span class="oi oi-magnifying-glass"></span>
+            </button>
+        </div>
+    </div>
+
+
+
+@code {
+    private string searchText = "";
+    private string category = "";
+    private string searchCategory = "";
+    private int pageNum = 1;
+
+    public void SearchCitations()
+    {
+        if(category == "Cars")
+        {
+            NavigationManager.NavigateTo($"/Cars/Index/{pageNum}/{searchText}/{searchCategory}");
+        }
+    }
+}

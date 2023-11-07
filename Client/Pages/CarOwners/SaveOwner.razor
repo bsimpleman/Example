@@ -1,0 +1,36 @@
+﻿@inject BlazorApp1.WebClient.Services.CarOwner.IOwnerClient _IOwnerClient
+@inject BlazorApp1.WebClient.Services.Car.ICarClient _ICarClient
+@inject NavigationManager NavigationManager
+
+<div class="outer">
+    <div class="inner">
+        <h4>@title</h4>
+    </div>
+
+    <br />
+
+    <div class="inner">
+        <EditForm Model="@ownerDetail" OnValidSubmit="SaveCarOwner">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="row">
+                <div class="form-group col">
+                    <label>First Name</label>
+                    <InputText @bind-Value="ownerDetail.OwnerFname" class="form-control"></InputText>
+                </div>
+
+                <div class="form-group col">
+                    <label>Last Name</label>
+                    <InputText @bind-Value="ownerDetail.OwnerLname" class="form-control"></InputText>
+                </div>
+
+                <div class="form-group col">
+                    <br />
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+
+        </EditForm>
+    </div>
+</div>

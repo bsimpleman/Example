@@ -1,0 +1,67 @@
+﻿@page "/Cars/Create"
+@page "/Cars/Edit/{CarId:guid}"
+@inject Services.Car.ICarClient _ICarClient
+@inject NavigationManager NavigationManager
+
+<div class="outer">
+    <div class="inner">
+        <h4>@title</h4>
+    </div>
+
+    <br />
+
+    @if(errorMessage != "")
+    {
+        <div class="inner">
+            <span class="alert-danger">@errorMessage</span>
+        </div>
+    }
+
+    <div class="inner">
+        <EditForm Model="@car" OnValidSubmit="SaveACar">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Make</label>
+                    <InputText @bind-Value="car.Make" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Model</label>
+                    <InputText @bind-Value="car.Model" class="form-control"></InputText>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Year</label>
+                    <InputNumber @bind-Value="car.CarYear" class="form-control"></InputNumber>
+                </div>
+            </div>
+
+            @*<div class="row">
+                <div class="form-group">
+                    <label>Price</label>
+                    <InputNumber @bind-Value="car.Price" class="form-control"></InputNumber>
+                </div>
+            </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <InputTextArea @bind-Value="car.CarDesc" class="form-control"></InputTextArea>
+                    </div>
+                </div>*@
+
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+
